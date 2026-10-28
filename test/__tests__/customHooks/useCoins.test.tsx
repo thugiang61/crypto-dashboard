@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useCoins from "@/customHooks/useCoins";
 import { coinsService } from "@/services/CoinsService";
 import type { ReactNode } from "react";
+import { MemoryRouter } from "react-router";
 
 const mockCoin = { id: "bitcoin", name: "Bitcoin" };
 
@@ -13,7 +14,11 @@ function createWrapper() {
   });
 
   return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>
+        {children}
+      </MemoryRouter>
+    </QueryClientProvider>
   );
 }
 

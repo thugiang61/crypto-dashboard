@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
 import { ThemeProvider } from "@/context/theme/ThemeProvider";
@@ -226,4 +226,63 @@ describe("Dashboard", () => {
       expect(screen.queryByText(/Showing/i)).not.toBeInTheDocument();
     });
   });
+
+  describe("Countdown timer and auto-refresh", () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it("shows initial countdown at 60s and decrements each second", () => {
+      renderDashboard();
+      expect(screen.getByText(/Auto refresh in:/i)).toBeInTheDocument();
+      expect(screen.getByText("60s")).toBeInTheDocument();
+
+      act(() => {
+        vi.advanceTimersByTime(1000);
+      });
+      expect(screen.getByText("59s")).toBeInTheDocument();
+
+      act(() => {
+        vi.advanceTimersByTime(9000);
+      });
+      expect(screen.getByText("50s")).toBeInTheDocument();
+
+      // resets countdown back to 60s when timer reaches 0
+      act(() => {
+        vi.advanceTimersByTime(50000);
+      });
+      expect(screen.getByText("60s")).toBeInTheDocument();
+    });
+
+    it("resets countdown to 60s when clicking 'Get latest data immediately!'", () => {
+      renderDashboard();
+      act(() => {
+        vi.advanceTimersByTime(15000);
+      });
+      expect(screen.getByText("45s")).toBeInTheDocument();
+
+      const refreshBtn = screen.getByRole("button", { name: /Get latest data immediately/i });
+      fireEvent.click(refreshBtn);
+
+      expect(screen.getByText("60s")).toBeInTheDocument();
+    });
+
+    // it("resets countdown back to 60s when timer reaches 0", () => {
+    //   renderDashboard();
+    //   act(() => {
+    //     vi.advanceTimersByTime(60000);
+    //   });
+    //   expect(screen.getByText("60s")).toBeInTheDocument();
+    // });
+  });
+
+  // TODO test cases để tự viết:
+  // it("TODO: click SortField '#' → useCoins được gọi lại với sortOption mới", () => {});
+  // it("TODO: click nút ► → useCoins được gọi với page + 1", () => {});
+  // it("TODO: đổi select Rows → useCoins gọi với numOfRows mới và page=1", () => {});
+  // it("TODO: click star của Bitcoin → Bitcoin xuất hiện trong savedCoins", () => {});
 });

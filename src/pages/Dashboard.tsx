@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useCoins from "@/customHooks/useCoins";
 import useThemeContext from "@/context/theme/ThemeContext";
 import SortField from "@/components/SortField";
@@ -40,6 +40,80 @@ export default function Dashboard () {
 
   const queryClient = useQueryClient();
 
+  const [timeLeft, setTimeLeft] = useState(60);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          queryClient.invalidateQueries({ queryKey: ["coins"] });
+          return 60;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [queryClient]);
+
+  const handleRefresh = () => {
+    queryClient.invalidateQueries({ queryKey: ["coins"] });
+    setTimeLeft(60);
+  };
+
+  // useEffect(() => {
+  //   setPagination(prev => ({ ...prev, currentPage: 1 }));
+  // }, [filters.category, filters.sortOption]);
+
+  // -- CẦN SỬA LẠI VS TTIN TỪ API
+  // const totalCoins = totalData.length;
+  // // const totalCoins = filters.category === "" ? data.length : totalData.length;
+  // const totalPages = totalCoins > pagination.numOfRows ? Math.ceil(totalCoins / pagination.numOfRows) : 1;
+
+  // // useMemo: Chỉ tính lại khi pagination thay đổi, không tính lại khi toggleTheme
+  // const from = (pagination.currentPage - 1) * pagination.numOfRows + 1;
+  // const data = useMemo(
+  //   () => [...totalData].splice(from - 1, pagination.numOfRows),
+  //   [from, pagination.numOfRows]
+  // );
+  // const to = from + data.length - 1;
+  // const isLoading = false;
+
+
+  // // useMemo: Chỉ tính lại khi currentPage hoặc totalPages thay đổi
+  // const paginationNumbers = useMemo(() => {
+  //   const delta = (pagination.currentPage === 1 || pagination.currentPage === totalPages) ? 4 : 2;
+  //   const range = [];
+  //   const rangeWithDots: (number | string)[] = [];
+  //   let l: number | undefined;
+
+  //   for (let i = 1; i <= totalPages; i++) {
+  //     if (
+  //       i === 1 ||
+  //       i === totalPages ||
+  //       (i >= pagination.currentPage - delta && i <= pagination.currentPage + delta)
+  //     ) {
+  //       range.push(i);
+  //     }
+  //   }
+
+  //   for (const i of range) {
+  //     if (l) {
+  //       if (i - l === 2) {
+  //         rangeWithDots.push(l + 1);
+  //       } else if (i - l !== 1) {
+  //         rangeWithDots.push('...');
+  //       }
+  //     }
+  //     rangeWithDots.push(i);
+  //     l = i;
+  //   }
+
+  //   return rangeWithDots;
+  // }, [pagination.currentPage, totalPages]);
+
+  // let from = 0, to = 0;
+  // if (error) return <div className="p-3">Error fetching coins! {error.message}</div>;
   if (error) return <div className="p-3">Error fetching coins!</div>;
 
   return (
@@ -50,10 +124,14 @@ export default function Dashboard () {
             <label htmlFor="dark-mode">Dark mode</label>
             <input type="checkbox" id="dark-mode" name="dark-mode" checked={theme === "dark"} className="w-5 h-5 ml-2 cursor-pointer" onChange={() => toggleTheme()}/>
           </div>
-          <div>
-            <button
+          <div className="flex items-center gap-3">
+            <span>
+              Auto refresh in: <span className="font-bold">{timeLeft}s</span>
+            </span>
+            <span className="font-bold my-2">OR</span>
+            <button 
               className="p-3 rounded-xl font-semibold transition-colors dark:text-white cursor-pointer border border-gray-300 dark:border-gray-700 hover:bg-gray-300 dark:hover:bg-gray-700"
-              onClick={() => queryClient.invalidateQueries({queryKey: ["coins"]})}
+              onClick={handleRefresh}
             >
               &#x21BB; Get latest data immediately!
             </button>
