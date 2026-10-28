@@ -1,4 +1,4 @@
-# .github/workflows/test.yml
+# .github/workflows/test.yml, nếu chỉ làm cá nhân hoặc chưa muốn áp dụng quy trình PR, workflow vẫn hữu ích để kiểm tra tự động, nhưng nên hiểu nó là cảnh báo sau push, không phải cơ chế bảo đảm hay cho phép merge.
 name: Run Tests
 
 on:
