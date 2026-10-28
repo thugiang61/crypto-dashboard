@@ -8,8 +8,6 @@ interface CoinRowProps {
   style?: React.CSSProperties,
 }
 
-
-
 function CoinRow ({coin, style}: CoinRowProps) {
 
   const {savedCoins, toggleSavedCoin} = usePortfolioContext();
@@ -30,7 +28,6 @@ function CoinRow ({coin, style}: CoinRowProps) {
       </span>
     );
   }
-
 
   return (
     <>

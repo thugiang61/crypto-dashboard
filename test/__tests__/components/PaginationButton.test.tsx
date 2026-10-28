@@ -75,11 +75,4 @@ describe("PaginationButton", () => {
     const result = updateFn({ currentPage: 1, numOfRows: 100 });
     expect(result.currentPage).toBe(1);
   });
-
-
-
-
-
-
-
 });

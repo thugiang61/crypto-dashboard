@@ -73,5 +73,4 @@ describe("SortField", () => {
     const result = updateFn(defaultFilters);
     expect(result.sortOption).toBe("volume_asc");
   });
-
 });

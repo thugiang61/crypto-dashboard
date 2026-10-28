@@ -31,7 +31,6 @@ function SortField ({field, setFilters, setPagination, sortOption, name}: SortFi
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-
         {
           name !== "coin" ?
             <>

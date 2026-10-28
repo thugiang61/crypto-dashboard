@@ -134,7 +134,6 @@ describe("Dashboard", () => {
       expect(screen.getByText("$3,000")).toBeInTheDocument();
     });
 
-
     it("show 'No coin left at this page' when data is empty", () => {
       vi.mocked(useCoins).mockReturnValue({
         data: [],
@@ -164,10 +163,6 @@ describe("Dashboard", () => {
   });
 
   describe("Favorite coin toggle", () => {
-
-
-
-
     it("click on star to save and unsave coin", async () => {
       renderDashboard();
       const starIcons = document.querySelectorAll("svg.cursor-pointer");
@@ -231,5 +226,4 @@ describe("Dashboard", () => {
       expect(screen.queryByText(/Showing/i)).not.toBeInTheDocument();
     });
   });
-
 });

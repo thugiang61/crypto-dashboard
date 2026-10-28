@@ -11,8 +11,6 @@ export default function PortfolioProvider ({children}: PortfolioProviderProps) {
     return  savedCoins ? JSON.parse(savedCoins) : {};
   });
 
-
-
   function toggleSavedCoin (id: string) {
     setSavedCoins(prev => {
       const newVal = {...prev, [id]: prev[id] ? false : true }

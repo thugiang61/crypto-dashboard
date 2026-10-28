@@ -44,5 +44,4 @@ describe("Sparkline", () => {
     expect(svg).toHaveAttribute("width", "200");
     expect(svg).toHaveAttribute("height", "60");
   });
-
 });

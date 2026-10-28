@@ -6,14 +6,6 @@ import PortfolioProvider from '@/context/portfolio/PortfolioProvider';
 import { Route, Routes } from 'react-router';
 import NotFound from '@/pages/NotFound';
 
-
-
-
-
-
-
-
-
 const queryClient = new QueryClient();
 
 function App() {

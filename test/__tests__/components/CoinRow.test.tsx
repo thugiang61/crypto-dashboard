@@ -85,5 +85,4 @@ describe("CoinRow", () => {
 
     expect(greenSpans[0].textContent).toContain("0.0%");
   });
-
 });

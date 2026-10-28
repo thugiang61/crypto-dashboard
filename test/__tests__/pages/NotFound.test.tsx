@@ -22,7 +22,4 @@ describe("NotFound", () => {
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", "/");
   });
-
-
-
 });

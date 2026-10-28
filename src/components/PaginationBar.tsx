@@ -9,15 +9,8 @@ interface PaginationBarProps {
 }
 
 function PaginationBar ({pagination, setPagination, dataLength} : PaginationBarProps) {
-
-
-
-
-
-
   const from = dataLength ? (pagination.currentPage - 1) * pagination.numOfRows + 1 : 0;
   const to = dataLength ? from + dataLength - 1 : 0;
-
 
   return (
     <>

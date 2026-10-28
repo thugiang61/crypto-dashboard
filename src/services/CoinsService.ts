@@ -11,7 +11,6 @@ class CoinsService extends HttpService {
     super(client);
   }
 
-
   getCoinList (filters: Filters, pagination: Pagination) {
     return this.get(
       COINS_ENDPOINT +
@@ -21,7 +20,6 @@ class CoinsService extends HttpService {
       `&order=${filters.sortOption.includes("#_asc") ? "market_cap_asc" : filters.sortOption.includes("#_desc") ? "market_cap_desc" : filters.sortOption}`
     );
   }
-
 
   getCategoryList() {
     return this.get(COINS_ENDPOINT + "/categories/list");

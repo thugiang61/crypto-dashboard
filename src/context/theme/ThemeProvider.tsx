@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactElement } from "react";
 import { ThemeContext } from "@/context/theme/ThemeContext";
 
-
 interface ThemeProviderProps {
   children: ReactElement
 }

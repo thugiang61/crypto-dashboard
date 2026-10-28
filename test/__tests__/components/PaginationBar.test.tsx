@@ -59,5 +59,4 @@ describe("PaginationBar", () => {
 
     expect(setPaginationMock).toHaveBeenCalledWith({ currentPage: 1, numOfRows: 50 });
   });
-
 });

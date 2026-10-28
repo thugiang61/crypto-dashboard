@@ -53,8 +53,4 @@ describe("ThemeContext", () => {
     expect(screen.getByTestId("theme")).toHaveTextContent("light");
     expect(document.documentElement.classList.contains("dark")).toBe(false);
   });
-
-
-
-
 });

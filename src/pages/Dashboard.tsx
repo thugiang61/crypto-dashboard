@@ -12,8 +12,6 @@ import styled from "@emotion/styled";
 import PaginationBar from "@/components/PaginationBar";
 import { useQueryClient } from "@tanstack/react-query";
 
-
-
 const DEFAULT_NUM_OF_ROWS = 100;
 
 const shimmer = keyframes`
@@ -41,14 +39,6 @@ export default function Dashboard () {
   const {theme, toggleTheme} = useThemeContext();
 
   const queryClient = useQueryClient();
-
-
-
-
-
-
-
-
 
   if (error) return <div className="p-3">Error fetching coins!</div>;
 
@@ -113,10 +103,7 @@ export default function Dashboard () {
                   ))
             }
           </tbody>
-
-
         </table>
-
 
         {isLoading ? <></> : <PaginationBar pagination={pagination} setPagination={setPagination} dataLength={data.length}/>}
 

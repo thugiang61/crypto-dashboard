@@ -3,11 +3,6 @@ import { coinsService } from "@/services/CoinsService";
 import type { Filters } from "@/models/filters.model";
 import type { Pagination } from "@/models/pagination.model";
 
-
-
-
-
-
 export default function useCoins (filters: Filters, pagination: Pagination) {
   return useQuery({
     queryKey: ["coins", filters, pagination],

@@ -11,12 +11,10 @@ interface CategorySelectProps {
   category: string
 }
 
-
 function CategorySelect ({category, setFilters, setPagination}: CategorySelectProps) {
   const {data, error, isLoading} = useCategories();
 
   if (error) return <div className="m-2">Error fetching categories!</div>;
-
 
   return (
     <>
@@ -33,14 +31,14 @@ function CategorySelect ({category, setFilters, setPagination}: CategorySelectPr
               setPagination(prev => ({...prev, currentPage: 1}))
             }}
           >
-                <option key="all" value={""}>All</option>
-                {(data as Category[]).map((category) => {
-                  return (
-                    <option key={category.category_id} value={category.category_id}>
-                      {category.name}
-                    </option>
-                  );
-                })}
+            <option key="all" value={""}>All</option>
+            {(data as Category[]).map((category) => {
+              return (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.name}
+                </option>
+              );
+            })}
           </select>
       }
     </>
