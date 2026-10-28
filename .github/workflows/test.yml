@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"             # Node version
+          node-version: "22"             # Dependencies require Node.js 22+
           cache: "npm"                   # Cache node_modules để lần sau nhanh hơn
 
       # 3. Cài dependencies

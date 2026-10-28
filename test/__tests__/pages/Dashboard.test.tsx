@@ -240,8 +240,9 @@ describe("Dashboard", () => {
       expect(screen.getByText("1h")).toBeInTheDocument();
       expect(screen.getByText("24h")).toBeInTheDocument();
       expect(screen.getByText("7d")).toBeInTheDocument();
-      // expect(screen.getByText("Total Volume")).toBeInTheDocument();
-      // expect(screen.getByText("Marktet Cap")).toBeInTheDocument();
+      // Vì capitalize là CSS, không thay đổi nội dung chữ trong DOM. Trong SortField.tsx, class này chỉ làm trình duyệt hiển thị chữ cái đầu mỗi từ viết hoa; nội dung JSX vẫn là total volume. Testing Library tìm nội dung trong DOM, không tìm chữ sau khi CSS biến đổi
+      expect(screen.getByText(/total volume/)).toBeInTheDocument();
+      expect(screen.getByText(/market cap/)).toBeInTheDocument();
       expect(screen.getByText("Last 7 Days")).toBeInTheDocument();
     });
   });

@@ -243,7 +243,8 @@ export default function Dashboard () {
   // }, [pagination.currentPage, totalPages]);
 
   // let from = 0, to = 0;
-  if (error) return <div className="p-3">Error fetching coins! {error.message}</div>;
+  // if (error) return <div className="p-3">Error fetching coins! {error.message}</div>;
+  if (error) return <div className="p-3">Error fetching coins!</div>;
   // if (!isLoading && data) {    
   //   from = (pagination.currentPage - 1) * pagination.numOfRows + 1;
   //   to = from + data.length - 1;
