@@ -1,0 +1,38 @@
+# .github/workflows/test.yml
+name: Run Tests
+
+on:
+  push:
+    branches: ["main", "master", "develop"]  # Các branch muốn trigger
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest   # Máy ảo chạy CI (Linux)
+
+    steps:
+      # 1. Clone repo về máy CI
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Cài Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"             # Node version
+          cache: "npm"                   # Cache node_modules để lần sau nhanh hơn
+
+      # 3. Cài dependencies
+      - name: Install dependencies
+        run: npm ci                      # ci: clean install, nhanh và deterministic hơn npm install
+
+      # 4. Type-check (tùy chọn)
+      - name: TypeScript type check
+        run: npx tsc --noEmit
+
+      # 5. Chạy tests
+      - name: Run tests
+        run: npx vitest run              # run: chạy 1 lần (không watch mode)
+        # Hoặc với coverage:
+        # run: npx vitest run --coverage
