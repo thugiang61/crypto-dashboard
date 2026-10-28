@@ -60,60 +60,7 @@ export default function Dashboard () {
     queryClient.invalidateQueries({ queryKey: ["coins"] });
     setTimeLeft(60);
   };
-
-  // useEffect(() => {
-  //   setPagination(prev => ({ ...prev, currentPage: 1 }));
-  // }, [filters.category, filters.sortOption]);
-
-  // -- CẦN SỬA LẠI VS TTIN TỪ API
-  // const totalCoins = totalData.length;
-  // // const totalCoins = filters.category === "" ? data.length : totalData.length;
-  // const totalPages = totalCoins > pagination.numOfRows ? Math.ceil(totalCoins / pagination.numOfRows) : 1;
-
-  // // useMemo: Chỉ tính lại khi pagination thay đổi, không tính lại khi toggleTheme
-  // const from = (pagination.currentPage - 1) * pagination.numOfRows + 1;
-  // const data = useMemo(
-  //   () => [...totalData].splice(from - 1, pagination.numOfRows),
-  //   [from, pagination.numOfRows]
-  // );
-  // const to = from + data.length - 1;
-  // const isLoading = false;
-
-
-  // // useMemo: Chỉ tính lại khi currentPage hoặc totalPages thay đổi
-  // const paginationNumbers = useMemo(() => {
-  //   const delta = (pagination.currentPage === 1 || pagination.currentPage === totalPages) ? 4 : 2;
-  //   const range = [];
-  //   const rangeWithDots: (number | string)[] = [];
-  //   let l: number | undefined;
-
-  //   for (let i = 1; i <= totalPages; i++) {
-  //     if (
-  //       i === 1 ||
-  //       i === totalPages ||
-  //       (i >= pagination.currentPage - delta && i <= pagination.currentPage + delta)
-  //     ) {
-  //       range.push(i);
-  //     }
-  //   }
-
-  //   for (const i of range) {
-  //     if (l) {
-  //       if (i - l === 2) {
-  //         rangeWithDots.push(l + 1);
-  //       } else if (i - l !== 1) {
-  //         rangeWithDots.push('...');
-  //       }
-  //     }
-  //     rangeWithDots.push(i);
-  //     l = i;
-  //   }
-
-  //   return rangeWithDots;
-  // }, [pagination.currentPage, totalPages]);
-
-  // let from = 0, to = 0;
-  // if (error) return <div className="p-3">Error fetching coins! {error.message}</div>;
+  
   if (error) return <div className="p-3">Error fetching coins!</div>;
 
   return (

@@ -270,19 +270,5 @@ describe("Dashboard", () => {
 
       expect(screen.getByText("60s")).toBeInTheDocument();
     });
-
-    // it("resets countdown back to 60s when timer reaches 0", () => {
-    //   renderDashboard();
-    //   act(() => {
-    //     vi.advanceTimersByTime(60000);
-    //   });
-    //   expect(screen.getByText("60s")).toBeInTheDocument();
-    // });
   });
-
-  // TODO test cases để tự viết:
-  // it("TODO: click SortField '#' → useCoins được gọi lại với sortOption mới", () => {});
-  // it("TODO: click nút ► → useCoins được gọi với page + 1", () => {});
-  // it("TODO: đổi select Rows → useCoins gọi với numOfRows mới và page=1", () => {});
-  // it("TODO: click star của Bitcoin → Bitcoin xuất hiện trong savedCoins", () => {});
 });
