@@ -1,38 +1,30 @@
-# .github/workflows/test.yml, nếu chỉ làm cá nhân hoặc chưa muốn áp dụng quy trình PR, workflow vẫn hữu ích để kiểm tra tự động, nhưng nên hiểu nó là cảnh báo sau push, không phải cơ chế bảo đảm hay cho phép merge.
 name: Run Tests
 
 on:
   push:
-    branches: ["main", "master", "develop"]  # Các branch muốn trigger
+    branches: ["main", "master", "develop"]
   pull_request:
     branches: ["main", "master"]
 
 jobs:
   test:
-    runs-on: ubuntu-latest   # Máy ảo chạy CI (Linux)
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. Clone repo về máy CI
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Cài Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"             # Dependencies require Node.js 22+
-          cache: "npm"                   # Cache node_modules để lần sau nhanh hơn
+          node-version: "22"
+          cache: "npm"
 
-      # 3. Cài dependencies
       - name: Install dependencies
-        run: npm ci                      # ci: clean install, nhanh và deterministic hơn npm install
+        run: npm ci
 
-      # 4. Type-check (tùy chọn)
       - name: TypeScript type check
         run: npx tsc --noEmit
 
-      # 5. Chạy tests
       - name: Run tests
-        run: npx vitest run              # run: chạy 1 lần (không watch mode)
-        # Hoặc với coverage:
-        # run: npx vitest run --coverage
+        run: npx vitest run

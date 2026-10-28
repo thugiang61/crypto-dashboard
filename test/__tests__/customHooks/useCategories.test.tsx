@@ -2,7 +2,6 @@ import useCategories from "@/customHooks/useCategories";
 import { coinsService } from "@/services/CoinsService";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
-// import { afterEach } from "node:test";
 import type { ReactNode } from "react";
 import { describe, it, vi, afterEach, expect } from "vitest";
 
@@ -26,8 +25,8 @@ describe("useCategories", () => {
 
     const { result } = renderHook(
       () => useCategories(),
-      { wrapper: createWrapper() } // wrapper của hook useCategories
-    ); // cần tạo QueryClientProvider để cug cấp queryClient mà dùg useQuery đc
+      { wrapper: createWrapper() }
+    );
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
@@ -41,7 +40,7 @@ describe("useCategories", () => {
     const { result } = renderHook(
       () => useCategories(),
       { wrapper: createWrapper() }
-    ); // cần tạo QueryClientProvider để cug cấp queryClient mà dùg useQuery đc
+    );
 
     await waitFor(() => expect(result.current.isError).toBe(true));
 

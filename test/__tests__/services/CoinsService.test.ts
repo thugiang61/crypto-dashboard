@@ -15,7 +15,6 @@ describe("CoinsService.getCoinList", () => {
     });
     await coinsService.getCoinList(mockFilters, mockPagination);
 
-    // Xác nhận endpoint có chứa các param quan trọng
     expect(spy).toHaveBeenCalledWith(
       expect.stringContaining("/coins/markets")
     );
@@ -26,7 +25,7 @@ describe("CoinsService.getCoinList", () => {
       expect.stringContaining("page=1")
     );
     expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining("order=market_cap_desc") // #_desc → market_cap_desc
+      expect.stringContaining("order=market_cap_desc")
     );
   });
 

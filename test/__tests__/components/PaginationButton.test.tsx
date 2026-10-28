@@ -1,4 +1,3 @@
-// test/__tests__/components/PaginationButton.test.tsx
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import PaginationButton from "@/components/PaginationButton";
@@ -32,7 +31,7 @@ describe("PaginationButton", () => {
     const setPaginationMock = vi.fn();
 
     renderBtn("◄", true, false, setPaginationMock);
-    expect(screen.getByRole("button")).toBeDisabled();    
+    expect(screen.getByRole("button")).toBeDisabled();
 
     fireEvent.click(screen.getByRole("button"));
 
@@ -51,8 +50,8 @@ describe("PaginationButton", () => {
     fireEvent.click(screen.getByRole("button"));
 
     const updateFn = setPaginationMock.mock.calls[0][0];
-    const result = updateFn(defaultPagination); // page 3
-    expect(result.currentPage).toBe(4);         // → page 4
+    const result = updateFn(defaultPagination);
+    expect(result.currentPage).toBe(4);
   });
 
   it("click ◄ button and currentPage decreases by 1", () => {
@@ -62,8 +61,8 @@ describe("PaginationButton", () => {
     fireEvent.click(screen.getByRole("button"));
 
     const updateFn = setPaginationMock.mock.calls[0][0];
-    const result = updateFn(defaultPagination); // page 3
-    expect(result.currentPage).toBe(2);         // → page 2
+    const result = updateFn(defaultPagination);
+    expect(result.currentPage).toBe(2);
   });
 
   it("click ◄ button when currentPage is 1 => currentPage is still 1", () => {
@@ -74,29 +73,13 @@ describe("PaginationButton", () => {
 
     const updateFn = setPaginationMock.mock.calls[0][0];
     const result = updateFn({ currentPage: 1, numOfRows: 100 });
-    expect(result.currentPage).toBe(1); // Math.max(1, 0) = 1
+    expect(result.currentPage).toBe(1);
   });
 
-  // it("click số trang => currentPage = số đó", () => {
-  //   const setPaginationMock = vi.fn();
-  //   renderBtn(7, false, false, setPaginationMock);
 
-  //   fireEvent.click(screen.getByRole("button"));
 
-  //   const updateFn = setPaginationMock.mock.calls[0][0];
-  //   const result = updateFn(defaultPagination);
-  //   expect(result.currentPage).toBe(7);
-  // });
 
-  // it("click disabled button => setPagination KHÔNG được gọi", () => {
-  //   const setPaginationMock = vi.fn();
-  //   renderBtn("◄", true, false, setPaginationMock);
 
-  //   fireEvent.click(screen.getByRole("button"));
 
-  //   expect(setPaginationMock).not.toHaveBeenCalled();
-  // });
 
-  // TODO: it("isActive=true → có class text-green-400", () => {});
-  // TODO: it("isActive=false → không có class text-green-400", () => {});
 });

@@ -1,4 +1,3 @@
-// test/__tests__/components/CoinRow.test.tsx
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import CoinRow from "@/components/CoinRow";
@@ -33,35 +32,29 @@ function renderCoinRow(savedCoins = {}, toggleSavedCoin = vi.fn(), coin = mockCo
 describe("CoinRow", () => {
   it("show coin's information correctly", () => {
     renderCoinRow();
-    expect(screen.getByText("1")).toBeInTheDocument(); // market_cap_rank
+    expect(screen.getByText("1")).toBeInTheDocument();
     expect(screen.getByText("Bitcoin")).toBeInTheDocument();
     expect(screen.getByText("btc")).toBeInTheDocument();
-    expect(screen.getByText("$81,593")).toBeInTheDocument(); // price
-    expect(screen.getByText("$25,277,241,750")).toBeInTheDocument(); // total volume
-    expect(screen.getByText("$1,639,947,861,371")).toBeInTheDocument(); // market_cap
+    expect(screen.getByText("$81,593")).toBeInTheDocument();
+    expect(screen.getByText("$25,277,241,750")).toBeInTheDocument();
+    expect(screen.getByText("$1,639,947,861,371")).toBeInTheDocument();
   });
 
-  // it("display formatted price ($81,593)", () => {
-  //   renderCoinRow();
-  //   expect(screen.getByText(/81,593/)).toBeInTheDocument();
-  // });
 
   it("1h% positive => show green text and up arrow", () => {
     renderCoinRow();
-    // 1h = +0.10% => green
     const greenSpans = document.querySelectorAll(".text-green-500");
     expect(greenSpans.length).toBeGreaterThan(0);
-    
+
     expect(screen.getByText("0.1%")).toBeInTheDocument();
     expect(screen.getAllByText("▲").length).toBeGreaterThan(0);
   });
 
   it("24h% negative => show red text and down arrow", () => {
     renderCoinRow();
-    // 24h = -0.72% => red
     const redSpans = document.querySelectorAll(".text-red-500");
     expect(redSpans.length).toBeGreaterThan(0);
-    
+
     expect(screen.getByText("0.7%")).toBeInTheDocument();
     expect(screen.getAllByText("▼").length).toBeGreaterThan(0);
   });
@@ -72,7 +65,6 @@ describe("CoinRow", () => {
     fireEvent.click(document.querySelector("svg")!);
 
     expect(toggleMock).toHaveBeenCalledWith(mockCoin.id);
-    // expect(document.querySelector("svg")).toHaveClass("fill-current");
   });
 
   it("star SVG fill-current when coin is saved", () => {
@@ -87,12 +79,11 @@ describe("CoinRow", () => {
 
   it("show green text when 1h% value is -0.0008 (because it is truncated into 0.0 ≥ 0)", () => {
     renderCoinRow({}, vi.fn(), {...mockCoin, price_change_percentage_1h_in_currency: -0.0008});
-    
+
     const greenSpans = document.querySelectorAll(".text-green-500");
     expect(greenSpans.length).toBeGreaterThan(0);
 
     expect(greenSpans[0].textContent).toContain("0.0%");
   });
 
-  // it("TODO: show sparkline SVG", () => {});
 });

@@ -1,4 +1,3 @@
-// test/__tests__/context/ThemeContext.test.tsx
 import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ThemeProvider } from "@/context/theme/ThemeProvider";
@@ -16,7 +15,6 @@ function TestConsumer() {
 
 function renderWithTheme() {
   return render(
-    // dùg context provider bọc component sẽ dùg data của context đó
     <ThemeProvider>
       <TestConsumer />
     </ThemeProvider>
@@ -56,25 +54,7 @@ describe("ThemeContext", () => {
     expect(document.documentElement.classList.contains("dark")).toBe(false);
   });
 
-  // it("toggleTheme thêm class 'dark' vào <html> khi dark", () => {
-  //   renderWithTheme();
-  //   fireEvent.click(screen.getByText("Toggle"));
-  //   expect(document.documentElement.classList.contains("dark")).toBe(true);
-  // });
 
-  // it("toggleTheme xóa class 'dark' khỏi <html> khi light", () => {
-  //   localStorage.setItem("theme", "dark");
-  //   renderWithTheme();
-  //   fireEvent.click(screen.getByText("Toggle"));
-  //   expect(document.documentElement.classList.contains("dark")).toBe(false);
-  // });
 
-  // it("lưu theme vào localStorage sau khi toggle", () => {
-  //   renderWithTheme();
-  //   fireEvent.click(screen.getByText("Toggle")); // light → dark
-  //   expect(localStorage.getItem("theme")).toBe("dark");
-  // });
 
-  // Test cases để tự viết:
-  // it("TODO: toggle 2 lần → trở về light", () => {});
 });

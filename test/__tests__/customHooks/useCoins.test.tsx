@@ -7,10 +7,9 @@ import type { ReactNode } from "react";
 
 const mockCoin = { id: "bitcoin", name: "Bitcoin" };
 
-// wrapper cung cấp QueryClient cho hook
 function createWrapper() {
   const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } }, // tắt retry để test nhanh hơn
+    defaultOptions: { queries: { retry: false } },
   });
 
   return ({ children }: { children: ReactNode }) => (
@@ -29,7 +28,6 @@ describe("useCoins", () => {
       { wrapper: createWrapper() }
     );
 
-    // đợi query hoàn thành
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
     expect(result.current.data).toEqual([mockCoin]);
@@ -38,7 +36,7 @@ describe("useCoins", () => {
 
   it("return error when fetching unsuccessfully", async () => {
     vi.spyOn(coinsService, "getCoinList").mockRejectedValueOnce("Error");
-    
+
     const { result } = renderHook(
       () => useCoins({ sortOption: "#_desc", category: "" }, { currentPage: 1, numOfRows: 100 }),
       { wrapper: createWrapper() }

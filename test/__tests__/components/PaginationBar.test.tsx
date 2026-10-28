@@ -1,4 +1,3 @@
-// test/__tests__/components/PaginationBar.test.tsx
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import PaginationBar from "@/components/PaginationBar";
@@ -22,7 +21,6 @@ function renderPaginationBar(
 
 describe("PaginationBar", () => {
   it("show content of 'Showing X to Y' correctly", () => {
-    // page 2, numOfRows 100, dataLength 100 => from=101, to=200
     renderPaginationBar();
     expect(screen.getByText(/Showing 101 to 200/)).toBeInTheDocument();
   });
@@ -34,7 +32,7 @@ describe("PaginationBar", () => {
 
   it("◄ button is disabled at page 1", () => {
     renderPaginationBar({ currentPage: 1, numOfRows: 100 });
-    const prevBtn = screen.getAllByRole("button")[0]; // nút đầu tiên là ◄
+    const prevBtn = screen.getAllByRole("button")[0];
     expect(prevBtn).toBeDisabled();
   });
 
@@ -62,6 +60,4 @@ describe("PaginationBar", () => {
     expect(setPaginationMock).toHaveBeenCalledWith({ currentPage: 1, numOfRows: 50 });
   });
 
-  // TODO: it("nút ◄ enabled khi currentPage > 1", () => {});
-  // TODO: it("nút ► enabled khi dataLength > 0", () => {});
 });

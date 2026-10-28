@@ -32,8 +32,8 @@ describe("PortfolioContext", () => {
 
   it("toggleSavedCoin unsaves a coin", () => {
     render(<PortfolioProvider><TestConsumer /></PortfolioProvider>);
-    fireEvent.click(screen.getByText("Toggle 1")); // save
-    fireEvent.click(screen.getByText("Toggle 1")); // unsave
+    fireEvent.click(screen.getByText("Toggle 1"));
+    fireEvent.click(screen.getByText("Toggle 1"));
     expect(screen.getByTestId("coin-1")).toHaveTextContent("false");
   });
 
